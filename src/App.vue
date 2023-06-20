@@ -1,7 +1,7 @@
 <template>
     <body class="min-h-screen flex flex-col">
 
-        <nav class="py-10 px-8 border-b border-gray-200">
+        <nav class="py-2 px-8 border-b border-gray-200">
             <div class="max-w-7xl mx-auto">
                 <div class="flex items-center justify-between">
                     <div class="menu-left">
@@ -14,9 +14,9 @@
                         </RouterLink>
                     </div>
 
-                    <div class="menu-center flex space-x-12" v-if="userStore.user.isAuthenticated">
+                    <div class="menu-center flex space-x-12" v-if="userStore.user.isAuthenticated && userStore.user.isAdmin == 'false'">
 
-                        <RouterLink to="/jobs" title="Emplois" :class="{ 'text-red-700': isURLContainsRoute('/jobs') }">
+                        <RouterLink class="hover:text-red-700" to="/jobs" title="Emplois" :class="{ 'text-red-700': isURLContainsRoute('/jobs') }">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -24,7 +24,7 @@
                             </svg>
                         </RouterLink>
 
-                        <RouterLink to="/internships" title="Stages"
+                        <RouterLink class="hover:text-red-700" to="/internships" title="Stages"
                             :class="{ 'text-red-700': isURLContainsRoute('/internships') }">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-6 h-6">
@@ -33,16 +33,14 @@
                             </svg>
                         </RouterLink>
 
-                        <RouterLink to="/graduates" title="Lauréats"
+                        <RouterLink class="hover:text-red-700" to="/graduates" title="Lauréats"
                             :class="{ 'text-red-700': isURLContainsRoute('/graduates') }">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
                             </svg>
                         </RouterLink>
 
-                        <RouterLink to="/settings" title="Paramètres"
+                        <RouterLink class="hover:text-red-700" to="/settings" title="Paramètres"
                             :class="{ 'text-red-700': isURLContainsRoute('/settings') }">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-6 h-6">
@@ -52,6 +50,16 @@
                             </svg>
                         </RouterLink>
 
+                        <button
+                        class="hover:text-red-700"
+                        title="Deconnexion"
+                        @click="logout"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
+                            </svg>
+                        </button>
+
                     </div>
 
                     <div class="menu-center flex space-x-12" v-else>
@@ -59,16 +67,15 @@
 
                     
                     <div class="menu-center flex space-x-12" v-if="userStore.user.isAdmin === true">
-                        <RouterLink  to="/allusers" title="Ajouter un utilisateur"
+                        <RouterLink  class="hover:text-red-700" to="/allusers" title="Ajouter un utilisateur"
                             :class="{ 'text-red-700': isURLContainsRoute('/addusers') }">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
                             </svg>
+
                         </RouterLink>
 
-                        <RouterLink  to="/addusers" title="Ajouter un utilisateur"
+                        <RouterLink  class="hover:text-red-700" to="/addusers" title="Ajouter un utilisateur"
                             :class="{ 'text-red-700': isURLContainsRoute('/addusers') }">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-6 h-6">
@@ -80,11 +87,11 @@
 
                     <div class="menu-right">
                         <template v-if="userStore.user.isAuthenticated && userStore.user.id">
-                            <h3>{{ this.userStore.user.lastName + ' ' + userStore.user.firstName }}</h3>
+                            <h3>{{ 'Bonjour ' + this.userStore.user.lastName + ' ' + userStore.user.firstName + ' !' }}</h3>
                         </template>
 
                         <template v-else>
-                            <div :class="{ 'hidden-element': isNotInLoginRoute() }" class="menu-right">
+                            <div :class="{ 'hidden-element': isNotLoginOrNewOfferRoute() }" class="menu-right">
                                 <RouterLink to="/login"
                                     class="mr-4 py-4 px-6 bg-red-700 hover:bg-red-900 text-white rounded-lg">Se
                                     connecter</RouterLink>
@@ -139,8 +146,6 @@ export default {
 
         const token = this.userStore.user.access
 
-        console.log(this.userStore.user.isAuthenticated)
-
         if (token) {
             axios.defaults.headers.common["Authorization"] = "Bearer " + token;
         } else {
@@ -151,12 +156,18 @@ export default {
         isURLContainsRoute(route) {
             return this.$route.path === route;
         },
-        isNotInLoginRoute() {
-            if (this.$route.path === '/login') {
+        isNotLoginOrNewOfferRoute() {
+            if (this.$route.path === '/login' || this.$route.path === '/newoffer' ) {
                 return true;
             }
 
             return false;
+        },
+
+        logout() {
+            console.log('Log out')
+            this.userStore.removeToken()
+            this.$router.push('/')
         }
     },
 };
