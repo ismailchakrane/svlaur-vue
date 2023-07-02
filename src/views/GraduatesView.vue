@@ -3,21 +3,17 @@
 
 		<div class="main-center col-span-4 space-y-5">
 
-			<h3 class="mb-6 text-xl"><strong>Liste des lauréats</strong></h3>
+			<h3 v-if="form.graduates !== null" class="mb-6 text-xl"><strong>Liste des lauréats</strong></h3>
+			<h3 v-else  class="flex items-center justify-center mt-[166px] text-xl"><strong>Pas de lauréats pour le moment</strong></h3>
 
-			<div class="shadow-lg bg-white border border-gray-200 rounded-lg">
-                <form  class="p-4 flex space-x-4" v-if="form.graduates !== null">  
-                    <input type="search" class="p-4 w-full bg-gray-100 rounded-lg" placeholder="Cherchez vous quelqu'un ?">
-                    <button class="inline-block py-4 px-6 bg-red-700 hover:bg-red-900 text-white rounded-lg">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path>
-                        </svg>
-                    </button>
+			<div v-if="form.graduates !== null" class="shadow-lg bg-white border border-gray-200 rounded-lg">
+                <form  class="p-4 flex space-x-4">  
+                    <input type="text" v-model="searchBar"  class="p-4 w-full bg-gray-100 rounded-lg" placeholder="Cherchez vous quelqu'un ?">
                 </form>
             </div>
 			
 			<div v-if="form.graduates !== null"> 
-				<div class="space-y-7"  v-for="graduate in form.graduates"
+				<div class="space-y-7"  v-for="graduate in filteredGraduates"
                 v-bind:key="graduate.id">
 					<div v-if="graduate.id !== userStore.user.id" class="flex items-center justify-between bg-white rounded-lg p-4 mb-2 shadow-lg">
 						<p class="text-base">
@@ -66,11 +62,13 @@ export default {
     },
     data() {
         return {
+            searchBar : '',
             form: {
                 graduates: '',
             },
         }
     },
+
 
 	beforeCreate() {
         this.userStore.initStore()
@@ -82,11 +80,36 @@ export default {
         } else {
             axios.defaults.headers.common["Authorization"] = "";
         }
+
+
     },
 
+	
 	mounted() {
+        this.checkUser()
         this.getGraduates()
     },
+
+    computed: {
+      filteredGraduates() {
+        return Object.values(this.form.graduates).filter(grad =>
+        grad.last_name.toLowerCase().includes(this.searchBar.toLowerCase())
+        || grad.first_name.toLowerCase().includes(this.searchBar.toLowerCase())
+        || 
+            (grad.job_title === null) ?  1 : grad.job_title.toLowerCase().includes(this.searchBar.toLowerCase())       
+        ||
+            (grad.year_of_graduate === null) ?  1 : grad.year_of_graduate.toLowerCase().includes(this.searchBar.toLowerCase())       
+        ||
+            (grad.place_of_work === null) ?  1 : grad.place_of_work.toLowerCase().includes(this.searchBar.toLowerCase())       
+
+        || grad.email.toLowerCase().includes(this.searchBar.toLowerCase())       
+        || grad.major.toLowerCase().includes(this.searchBar.toLowerCase())       
+        || grad.year_of_major.toLowerCase().includes(this.searchBar.toLowerCase())    
+        );
+      },
+    },
+
+    
 
 	methods: {
         getGraduates() {
@@ -95,16 +118,25 @@ export default {
                 .then(response => {
 
                     this.form.graduates = response.data
-					console.log('users ', this.form.graduates)
                 })
 				.catch(error => {
                     console.log('error', error)
                 })
+        },
+
+        checkUser() {
+            if (this.userStore.user.isAuthenticated) {
+                this.$router.push('/graduates');
+            } else {
+                this.$router.push('/');
+            }
         }
     }
 }
 
 </script>
+
+
 
 
 

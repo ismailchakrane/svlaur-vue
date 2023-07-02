@@ -8,26 +8,26 @@
                 <form class="space-y-6" v-on:submit.prevent="submitForm">
                     <div>
                         <label>Titre d'offre</label><br>
-                        <input type="email"  v-model="form.offerTitle" placeholder="Votre adresse e-mail"
+                        <input type="text"  v-model="form.offerTitle" placeholder="Titre d'offre"
                             class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg" required>
                     </div>
 
                     <div>
                         <label>Nom d'entreprise</label><br>
-                        <input type="email"  v-model="form.companyName" placeholder="Votre adresse e-mail"
+                        <input type="text"  v-model="form.companyName" placeholder="Nom d'entreprise"
                             class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg" required>
                     </div>
 
                     <div>
                         <label>Image (si nécessaire)</label><br>
-                        <input type="file" @change="onImgInputChange" accept="image/*" class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg"  name="myfile" required/>
+                        <input type="file" ref="img" accept="image/*" class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg" />
                     </div>
                     
                     
-                    <!-- <div>
+                    <div>
                         <label>Annonce PDF (si nécessaire)</label><br>
-                        <input type="file"  @change="onPdfInputChange class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg" accept=".pdf" name="myfile" required/>
-                    </div>  -->
+                        <input type="file" ref="pdf" class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg" accept=".pdf"/>
+                    </div> 
                    
 
                     <div>
@@ -40,7 +40,7 @@
 
                     <div>
                         <label>Description</label><br>
-                        <textarea v-model="form.offerDescription"  class="p-4 my-2 w-full bg-gray-100 rounded-lg" placeholder="Descrption de l'offre" required></textarea>
+                        <textarea v-model="form.offerDescription"  class="p-4 my-2 w-full bg-gray-100 rounded-lg" placeholder="Description de l'offre" required></textarea>
                     </div>
 
                     <template v-if="errors.length > 0">
@@ -83,7 +83,6 @@ export default {
                 companyName: '',
                 offerDescription: '',
                 offerType: '',
-                offerImg: '',
             },
             errors: []
         }
@@ -101,23 +100,13 @@ export default {
         }
     },
 
-
-
-    // mounted() {
-    //     this.checkUser()
-    // },
+    mounted() {
+        this.checkUser()
+    },
 
     methods: {
-        onImgInputChange(event){
-            console.log(event.target.files)
-            this.form.offerImg = event.target.files[0];
-        },
 
-        // onPdfInputChange(event){
-        //     this.offerImg = event.target.files[1];
-        // },
-
-        async submitForm() {
+        submitForm() {
             this.errors = []
 
             if (this.form.offerTitle === '') {
@@ -136,26 +125,46 @@ export default {
                 this.errors.push("Veuillez remplir la description de l'offre")
             }
             
+            console.log(this.$refs)
+            
+            if (this.$refs.img.files[0]) {
+                
+                const suitedImgFormat = ['png','jpg','jpeg','PNG','JPG','JPEG'];
 
-            // Verify if a file is selected
-            if (!this.form.offerImg) {
-                this.errors.push('Veuillez selectionner un fichier')
+                if (!suitedImgFormat.includes(this.$refs.img.files[0].name.slice(-3))) {
+                    this.errors.push("Veuillez selectionner une image")
+                }
             }
 
-            // Verify if the selected file is a CSV
-            const suitedImgFormat = ['png','jpg','jpeg','PNG','JPG','JPEG'];
+                        
+            if (this.$refs.pdf.files[0]) {
+                
+                const suitedPDFFormat = ['pdf','PDF'];
 
-            if (suitedImgFormat.includes(this.form.offerImg.name.slice(-3))) {
-                this.errors.push('Veuillez selectionner une image')
+                if (!suitedPDFFormat.includes(this.$refs.pdf.files[0].name.slice(-3))) {
+                    this.errors.push("Veuillez selectionner un PDF")
+                }
             }
-
 
             if (this.errors.length === 0) {
 
                 this.form.offerType = (this.form.offerType === "job") ? true : false;
 
+                let formData = new FormData()
+                formData.append('title', this.form.offerTitle)
+                formData.append('created_by', this.form.companyName)
+                formData.append('description', this.form.offerDescription)
+                formData.append('is_job', this.form.offerType)
+                formData.append('offer_img', this.$refs.img.files[0])
+                formData.append('offer_pdf', this.$refs.pdf.files[0])
+
+
                 axios
-                    .post('/api/offer/create', this.form)
+                    .post('/api/offer/create/', formData, {
+                        headers: {
+                            "Content-Type": "multipart/form-data",
+                        }
+                    })                    
                     .then(response => {
                         if (response.data.message === 'success') {
                             console.log("offer registred")
@@ -176,10 +185,12 @@ export default {
         },
 
         checkUser() {
-            if (this.userStore.user.isAuthenticated) {
-                this.$router.push('/jobs');
-            } else {
-                this.$router.push('/newoffer');
+            if (this.userStore.user.isAdmin === 'true') {
+                this.$router.push('/stat');
+            } else if(this.userStore.user.isAuthenticated) {
+				(this.userStore.user.isGraduate === 'true') ? this.$router.push('/jobs') : this.$router.push('/internships');
+			} else {
+                this.$router.push('/');
             }
         }
     }

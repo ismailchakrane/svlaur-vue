@@ -3,10 +3,16 @@ import HomeView from '../views/HomeView.vue'
 import JobsView from '../views/JobsView.vue'
 import LoginView from '../views/LoginView.vue'
 import InternshipsView from '../views/InternshipsView.vue'
-import SettingsView from '../views/SettingsView.vue'
 import NewOfferFormView from '../views/NewOfferFormView.vue'
 import GraduatesView from '../views/GraduatesView.vue'
+import UsersView from '../views/UsersView.vue'
+import OfferView from '../views/OfferView.vue'
 import AddUsersView from '../views/AddUsersView.vue'
+import PageNotFoundView from '../views/PageNotFoundView.vue'
+import OffersView from '../views/OffersView.vue'
+import StatView from '../views/StatView.vue'
+import UserView from '../views/UserView.vue'
+import UnverifiedOfferView from '../views/UnverifiedOfferView.vue'
 
 
 
@@ -29,11 +35,6 @@ const router = createRouter({
       component: InternshipsView
     },
     {
-      path: '/settings',
-      name: 'settings',
-      component: SettingsView
-    },
-    {
       path: '/login',
       name: 'login',
       component: LoginView
@@ -52,24 +53,41 @@ const router = createRouter({
       path: '/addusers',
       name: 'addusers',
       component: AddUsersView
-    },
-
-
+    }, 
     {
-      path: '/:catchAll(.*)',
-      name: 'NotFound',
-      component: {
-        render: {'fdvdfv':'404 - Page Not Found'}
-      }
+      path: '/users',
+      name: 'users',
+      component: UsersView
+    },
+    {
+      path: '/user/:id',
+      name: 'user',
+      component: UserView
+    },
+    {
+      path: '/offer/:id',
+      name: 'offer',
+      component: OfferView,
+    },
+    {
+      path: '/offer/unverified/:id',
+      name: 'unverifiedoffer',
+      component: UnverifiedOfferView,
+    },
+    {
+      path: '/stat',
+      name: 'stat',
+      component: StatView,
+    },
+    {
+      path: '/offers',
+      name: 'offers',
+      component: OffersView,
+    },
+    { 
+      path: '/:pathMatch(.*)*', 
+      component: PageNotFoundView,
     }
-    // {
-    //   path: '/about',
-    //   name: 'about',
-    //   // route level code-splitting
-    //   // this generates a separate chunk (About.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () => import('../views/AboutView.vue')
-    // }
   ]
 })
 

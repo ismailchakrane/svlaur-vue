@@ -26,10 +26,10 @@ export const useUserStore = defineStore({
 
     actions: {
         initStore() {
-            console.log('initStore', localStorage.getItem('user.access'))
+            // console.log('initStore', localStorage.getItem('user.access'))
 
             if (localStorage.getItem('user.access')) {
-                console.log('User has access!')
+                // console.log('User has access!')
 
                 this.user.access = localStorage.getItem('user.access')
                 this.user.refresh = localStorage.getItem('user.refresh')
@@ -49,12 +49,12 @@ export const useUserStore = defineStore({
 
                 this.refreshToken()
 
-                console.log('Initialized user:', this.user)
+                // console.log('Initialized user:', this.user)
             }
         },
 
         setToken(data) {
-            console.log('setToken', data)
+            // console.log('setToken', data)
 
             this.user.access = data.access
             this.user.refresh = data.refresh
@@ -63,11 +63,11 @@ export const useUserStore = defineStore({
             localStorage.setItem('user.access', data.access)
             localStorage.setItem('user.refresh', data.refresh)
 
-            console.log('user.access: ', localStorage.getItem('user.access'))
+            // console.log('user.access: ', localStorage.getItem('user.access'))
         },
 
         removeToken() {
-            console.log('removeToken')
+            // console.log('removeToken')
 
             this.user.refresh = null
             this.user.access = null
@@ -102,7 +102,7 @@ export const useUserStore = defineStore({
         },
 
         setUserInfo(user) {
-            console.log('setUserInfo', user)
+            // console.log('setUserInfo', user)
 
             this.user.id = user.id
             this.user.lastName = user.last_name
@@ -111,11 +111,12 @@ export const useUserStore = defineStore({
             this.user.major = user.major
             this.user.yearOfMajor = user.year_of_major
             this.user.linkedinLink = user.linkedin_link
-            this.user.placeOfWork = user.place_of_work
+            this.user.placeOfWork = user.place_of_work 
             this.user.jobTitle = user.job_title
             this.user.yearOfGraduate = user.year_of_graduate
             this.user.isGraduate = user.is_graduate
             this.user.isAdmin = user.is_admin
+
 
             localStorage.setItem('user.id', this.user.id)
             localStorage.setItem('user.lastName',this.user.lastName)
@@ -130,7 +131,7 @@ export const useUserStore = defineStore({
             localStorage.setItem('user.isGraduate',this.user.isGraduate)
             localStorage.setItem('user.isAdmin',this.user.isAdmin)
 
-            console.log('User', this.user)
+            // console.log('User', this.user)
         },
 
         refreshToken() {

@@ -45,14 +45,19 @@
 import axios from 'axios'
 
 import { useToastStore } from '@/stores/toast'
+import { useUserStore } from '@/stores/user'
+
 
 export default {
     
     setup() {
+
+        const userStore = useUserStore()
         const toastStore = useToastStore()
 
         return {
-            toastStore
+            toastStore,
+            userStore
         }
     },
 
@@ -75,10 +80,38 @@ export default {
             errors: [],
         }
     },
+
+	beforeCreate() {
+        this.userStore.initStore()
+
+        const token = this.userStore.user.access
+
+        if (token) {
+            axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+        } else {
+            axios.defaults.headers.common["Authorization"] = "";
+        }
+
+
+    },
+
+	mounted() {
+        this.checkUser()
+    },
+    
     methods: {
+        checkUser() {
+            if (this.userStore.user.isAdmin === 'true') {
+                this.$router.push('/addusers');
+            } else {
+                this.$router.push('/');
+            }
+        },
+
         onFileInputChange(event){
             this.selectedFile = event.target.files[0];
         },
+
         submitForm() {
             this.errors = []
 
@@ -181,7 +214,7 @@ export default {
                         }
 
                         if(jobTitle !== "null" ){
-                            if(jobTitle.length < 10 || containsNumberPattern.test(major)){
+                            if(jobTitle.length < 10 || containsNumberPattern.test(jobTitle)){
                                 this.errors.push("Dans la ligne numéro ",i,"Titre d'emplois doit avoir au moin 10 caractères et doit être valide")
                                 return;
                             }

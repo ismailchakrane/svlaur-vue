@@ -22,22 +22,14 @@
                     <div>
                         <label>E-mail</label><br>
                         <input type="email" v-model="form.email"  placeholder="Votre adresse e-mail"
-                            class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg">
+                            class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg" required>
                     </div>
 
                     <div>
                         <label>Mot de passe</label><br>
                         <input type="password" v-model="form.password" placeholder="Votre Mot de passe"
-                            class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg">
+                            class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg" required>
                     </div>
-<!-- 
-                    <div>
-                        <label>Rôle</label><br>
-                        <select class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg">
-                            <option value="admin">Administrateur</option>
-                            <option value="student">Etudiant / Lauréat</option>
-                        </select>
-                    </div> -->
 
                     <template v-if="errors.length > 0">
                         <div class="bg-red-600 my-4 text-white rounded-lg p-6">
@@ -77,7 +69,35 @@ export default {
             errors: []
         }
     },
+
+    beforeCreate() {
+        this.userStore.initStore()
+        
+        const token = this.userStore.user.access
+
+        if (token) {
+            axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+        } else {
+            axios.defaults.headers.common["Authorization"] = "";
+        }
+    },
+
+    mounted() {
+        this.checkConnexion()
+    },
+
     methods: {
+        checkConnexion() {
+            if (this.userStore.user.isAuthenticated) {
+                if(this.userStore.user.isAdmin === 'true'){
+                    this.$router.push('/stat');
+                } else if(this.userStore.user.isGraduate === 'true') {
+                    this.$router.push('/jobs');
+                }else {
+                    this.$router.push('/internships');
+                }
+            }
+        },
         async submitForm() {
             this.errors = []
 
@@ -109,11 +129,18 @@ export default {
                 await axios
                     .get('/api/me/')
                     .then(response => {
+
+
                         this.userStore.setUserInfo(response.data)
-                        if(this.userStore.isGraduate === true){
+
+
+                        if(this.userStore.user.isAdmin === true){
+                            this.$router.push('/addusers')
+                        }
+                        else if(this.userStore.user.isGraduate === true){
                             this.$router.push('/jobs')
                         }
-                        else {
+                         else {
                             this.$router.push('/internships')
                         }
                     })

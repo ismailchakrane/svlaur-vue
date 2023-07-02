@@ -5,30 +5,31 @@
 			<div class="shadow-lg bg-white border border-gray-200 rounded-lg">
 				<h3 class="mb-10 mt-7 text-xl text-center"><strong>Nous somme qui ?</strong></h3>
 				<div class="m-10 mr-20 mb-12 text-justify space-x-6">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus
-					doloribus, ab eum laudantium suscipit similique laboriosam molestias accusantium velit officiis
-					aperiam nesciunt incidunt modi non optio voluptates sit minus assumenda.
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus
-					doloribus, ab eum laudantium suscipit similique laboriosam molestias accusantium velit officiis
-					aperiam nesciunt incidunt modi non optio voluptates sit minus assumenda.
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus
-					doloribus, ab eum laudantium suscipit similique laboriosam molestias accusantium velit officiis
-					aperiam nesciunt incidunt modi non optio voluptates sit minus assumenda.
+					Nous sommes une plateforme de gestion des lauréats de L'ENSAM Rabat, 
+					dédiée à faciliter la vie des étudiants en mettant à leur disposition un 
+					ensemble d'outils et de fonctionnalités. Notre site propose une
+					gestion complète des étudiants et des lauréats, des stages ainsi que des 
+					offres d'emploi en cours. Grâce à notre plateforme conviviale et intuitive, 
+					les étudiants peuvent consulter les offres de stages et d'emploi publiées par les entreprises
+					et rester informés des dernières opportunités disponibles. 
+					Nous sommes là pour soutenir les lauréats tout au long de 
+					leur parcours professionnel en leur offrant une interface 
+					centralisée pour accéder à toutes les informations pertinentes 
+					et les aider à trouver des opportunités prometteuses pour leur carrière.
 				</div>
 
 				<h3 class="mb-10 mt-7 text-xl text-center"><strong>Nos services</strong></h3>
 
 				<div class="flex flex-row">
 					<div class="m-10 grow text-justify basis-3/4">
-						Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						Temporibus doloribus, ab eum laudantium suscipit similique laboriosam molestias accusantium velit
-						officiis aperiam nesciunt incidunt modi non optio voluptates sit minus assumenda.
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus
-						doloribus, ab eum laudantium suscipit similique laboriosam molestias accusantium velit officiis
-						aperiam nesciunt incidunt modi non optio voluptates sit minus assumenda.
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus
-						doloribus, ab eum laudantium suscipit similique laboriosam molestias accusantium velit officiis
-						aperiam nesciunt incidunt modi non optio voluptates sit minus assumenda.
+						Notre plateforme offre aux étudiants un accès facile et rapide à une 
+						multitude de ressources liées aux lauréats, stages et offres d'emploi. 
+						En tant qu'étudiant, vous pouvez consulter les listes de lauréats récents, 
+						parcourir les différentes opportunités de stages disponibles dans diverses 
+						entreprises, et explorer les offres d'emploi proposées par des employeurs. 
+						Notre interface vous permet de filtrer les résultats 
+						en fonction de vos préférences et compétences, vous aidant ainsi à trouver 
+						les opportunités les plus pertinentes pour votre parcours académique et professionnel.
 						<p class="font-bold">
 							Vous pouvez se connecter et consulter les stages en cliquant sur le							
 							<RouterLink :to="{ 'name': 'login' }" class="underline">lien</RouterLink>
@@ -53,15 +54,13 @@
 						</svg>
 					</div>
 					<div class="m-10 mr-20 grow text-justify basis-3/4">
-						Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						Temporibus doloribus, ab eum laudantium suscipit similique laboriosam molestias accusantium velit
-						officiis aperiam nesciunt incidunt modi non optio voluptates sit minus assumenda.
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus
-						doloribus, ab eum laudantium suscipit similique laboriosam molestias accusantium velit officiis
-						aperiam nesciunt incidunt modi non optio voluptates sit minus assumenda.
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus
-						doloribus, ab eum laudantium suscipit similique laboriosam molestias accusantium velit officiis
-						aperiam nesciunt incidunt modi non optio voluptates sit minus assumenda.
+						En tant que lauréat, vous avez accès à une section dédiée où vous pouvez consulter 
+						les profils d'autres lauréats et découvrir leurs parcours. 
+						Cette fonctionnalité vous permet de vous inspirer et d'établir des connexions avec des personnes qui partagent des intérêts similaires. 
+						De plus, vous pouvez également accéder aux offres d'emploi et aux opportunités de stage ouvertes. 
+						Cela vous donne un avantage supplémentaire en termes de visibilité 
+						et de possibilités de carrière, vous permettant de postuler à des 
+						postes adaptés à votre expertise et vos aspirations professionnelles.
 						<p class="font-bold">
 							Vous pouvez se connecter et consulter les offres d'emplois en cliquant sur le							
 							<RouterLink :to="{ 'name': 'login' }" class="underline">lien</RouterLink>
@@ -72,15 +71,13 @@
 
 				<div class="flex flex-row">
 					<div class="m-10 grow text-justify basis-3/4">
-						Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						Temporibus doloribus, ab eum laudantium suscipit similique laboriosam molestias accusantium velit
-						officiis aperiam nesciunt incidunt modi non optio voluptates sit minus assumenda.
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus
-						doloribus, ab eum laudantium suscipit similique laboriosam molestias accusantium velit officiis
-						aperiam nesciunt incidunt modi non optio voluptates sit minus assumenda.
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus
-						doloribus, ab eum laudantium suscipit similique laboriosam molestias accusantium velit officiis
-						aperiam nesciunt incidunt modi non optio voluptates sit minus assumenda.
+						La plateforme offre également aux entreprises la possibilité de publier des offres 
+						d'emploi et des offres de stage pour attirer les meilleurs talents parmi notre 
+						communauté de lauréats. Nous mettons en avant votre marque 
+						et vos opportunités, permettant ainsi une visibilité accrue auprès de notre 
+						réseau de lauréats qualifiés. Que vous recherchiez des talents fraîchement 
+						diplômés ou des profils expérimentés, notre plateforme vous offre un moyen 
+						efficace, facile et ciblé de recruter les meilleurs candidats pour votre entreprise.
 						<p class="font-bold">
 							Vous pouvez publier une offre de stage ou d'emplois en cliquant sur le
 							<RouterLink :to="{ 'name': 'newoffer' }" class="underline">lien</RouterLink>
@@ -136,9 +133,11 @@ export default {
     methods: {
 
         checkUser() {
-            if (this.userStore.user.isAuthenticated) {
-                this.$router.push('/jobs');
-            } else {
+            if (this.userStore.user.isAdmin === 'true') {
+                this.$router.push('/stat');
+            } else if(this.userStore.user.isAuthenticated) {
+				(this.userStore.user.isGraduate === 'true') ? this.$router.push('/jobs') : this.$router.push('/internships');
+			} else {
                 this.$router.push('/');
             }
         }
