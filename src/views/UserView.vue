@@ -40,7 +40,7 @@
                     </div>
 
 
-                    <div v-if="form.user.is_graduate !== null" class="space-y-3">
+                    <div class="space-y-3">
                         
                         <label>
                             Année
@@ -63,10 +63,10 @@
                             </select>
                         </label>
 
-                        <label>
+                        <label v-if="form.user.is_graduate !== null">
                             Promo
                             <input type="text"  v-model="form.user.year_of_graduate" placeholder="Filière"
-                                class="w-full m-2 p-4  border border-gray-200 rounded-lg" required>
+                                class="w-full m-2 p-4  border border-gray-200 rounded-lg">
                         </label>
                     </div>
 
@@ -88,7 +88,7 @@
                         <label>
                             Lien LinkedIn
                             <input type="text"  v-model="form.user.linkedin_link" placeholder="Lien LinkedIn"
-                                class="w-full m-2 p-4  border border-gray-200 rounded-lg" required>
+                                class="w-full m-2 p-4  border border-gray-200 rounded-lg">
                         </label>
                     </div>
 
@@ -96,13 +96,13 @@
                         <label>
                             Lieu de travail (entreprise / organisation)
                             <input type="text"  v-model="form.user.place_of_work" placeholder="Lieu de travail"
-                                class="w-full m-2 p-4  border border-gray-200 rounded-lg" required>
+                                class="w-full m-2 p-4  border border-gray-200 rounded-lg">
                         </label>
 
                         <label>
                             Titre du poste de travail
                             <input type="text"  v-model="form.user.job_title" placeholder="Titre du poste de travail"
-                                class="w-full m-2 p-4  border border-gray-200 rounded-lg" required>
+                                class="w-full m-2 p-4  border border-gray-200 rounded-lg">
                         </label>
                     </div>
 
@@ -190,11 +190,11 @@ export default {
         submitForm() {
             this.errors = []
 
-            const namePattern = /^[A-Za-z]+$/;
+            const namePattern = /^[a-z ,.'-]+$/i;
             const emailPattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
             const containsNumberPattern = /^\d+(\.\d+)?$/;
             const urlPattern = /^(https?:\/\/)?([\w.-]+)\.([a-z]{2,})(\/\S*)?$/i;
-            const passPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            const passPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"/;
 
 
             if(this.form.user.last_name.length < 3 || !namePattern.test(this.form.user.last_name)){
@@ -217,37 +217,37 @@ export default {
                 return;
             }
 
-            if(this.form.user.linkedin_link !== ""){
+            if(this.form.user.linkedin_link !== null){
                 if(this.form.user.linkedin_link < 30 || !urlPattern.test(this.form.user.linkedin_link)){
                     this.errors.push("Lien linkedIn doit être valide")
                     return;
                 }
             }
 
-            if(this.form.user.place_of_work !== ""){
+            if(this.form.user.place_of_work !== null){
                 if(this.form.user.place_of_work.length < 3 ){
                     this.errors.push("Nom d'entreprise doit avoir au moin 3 caractères")
                     return;
                 }
             }
 
-            if(this.form.user.job_title !== "" ){
-                if(this.form.user.job_title.length < 10 || containsNumberPattern.test(this.form.user.job_title)){
+            if(this.form.user.job_title !== null){
+                if(containsNumberPattern.test(this.form.user.job_title)){
                     this.errors.push("Titre d'emplois doit avoir au moin 10 caractères et doit être valide")
                     return;
                 }
             }
 
-            if(this.form.user.year_of_graduate !== ""){
+            if(this.form.user.year_of_graduate !== null){
                 if(this.form.user.year_of_graduate.length !== 9){
                     this.errors.push('Promotion doit avoir exactement 9 caractères (ex: 2022-2023)')
                     return;
                 }
             }
 
-            if(this.form.user.password !== ""){
+            if(this.form.user.password !== null){
                 if(passPattern.test(this.form.user.password) ){
-                    this.errors.push("Mot de passe doit avoir au minimum 8 charactères, une seule majuscule, une seule miniscule, un nombre  et un seule charactère special")
+                    this.errors.push("Mot de passe doit avoir au minimum 8 charactères, une majuscule, une miniscule, un nombre")
                     return;
                 }
             }

@@ -3,9 +3,9 @@
 
 		<div class="main-center col-span-4 space-y-5">
             <div class="flex flex-col bg-white rounded-lg p-4 mb-4 shadow-lg" v-if="form.offer !== null">
-                <h2 class="mb-4 ml-9 text-lg"><strong>Titre d'offre :</strong>{{ ' ' + form.offer.title }}</h2>
-                <h2 class="mb-4 ml-9 text-lg"><strong>Date de publication :</strong>{{ ' '+ form.offer.date_created }}</h2>
-                <h2 class="mb-4 ml-9 text-lg"><strong>Entreprise / Organisation :</strong>{{ ' '+ form.offer.created_by }}</h2>
+                <h3 class="mb-4 ml-9 text-base"><strong>Titre d'offre :</strong>{{ ' ' + form.offer.title }}</h3>
+                <h3 class="mb-4 ml-9 text-base"><strong>Date de publication :</strong>{{ ' '+ form.offer.date_created }}</h3>
+                <h3 class="mb-4 ml-9 text-base"><strong>Entreprise / Organisation :</strong>{{ ' '+ form.offer.created_by }}</h3>
 
                 <img 
                      v-if="form.offer.offer_img !== null" class="mx-auto my-6" width="200" 

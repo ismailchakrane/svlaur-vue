@@ -147,8 +147,6 @@ export default {
                             columns[i] = columns[i].trim();
                         }
 
-                        console.log(columns);
-
                         if(columns.length !== 11){
                             this.errors.push('Veuillez respecter le format des champs déjà mentionné ci-dessus ');
                             return;
@@ -166,7 +164,7 @@ export default {
                         let isGraduate = columns[9];
                         let isAdmin = columns[10];
 
-                        const namePattern = /^[A-Za-z]+$/;
+                        const namePattern = /^[a-z ,.'-]+$/i;
                         const emailPattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
                         const yearOfmajorPattern = /^(1|2|3)$/;
                         const containsNumberPattern = /^\d+(\.\d+)?$/;
@@ -214,7 +212,7 @@ export default {
                         }
 
                         if(jobTitle !== "null" ){
-                            if(jobTitle.length < 10 || containsNumberPattern.test(jobTitle)){
+                            if(containsNumberPattern.test(jobTitle)){
                                 this.errors.push("Dans la ligne numéro ",i,"Titre d'emplois doit avoir au moin 10 caractères et doit être valide")
                                 return;
                             }
@@ -285,8 +283,7 @@ export default {
                                 .post('/api/signup/', this.form)
                                 .then(response => {
                                     if (response.data.message === 'success') {
-                                        console.log('The user ' + this.form.lastName + ' '+ this.form.firstName  + ' is registered')
-
+                                        
                                         this.toastStore.showToast(1000, 'The user ' + this.form.lastName + ' '+ this.form.firstName  + ' is registered', 'bg-emerald-600')
 
                                         this.form.lastName = ''
