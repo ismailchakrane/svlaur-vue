@@ -1,6 +1,6 @@
 # svlaur
 
-This template should help get you started developing with Vue 3 in Vite.
+This is a front end part of a website for managing graduates of the ENSAM Rabat School
 
 ## Recommended IDE Setup
 
