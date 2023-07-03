@@ -1,6 +1,6 @@
 # svlaur
 
-This is a front end part of a website for managing graduates of the ENSAM Rabat School
+This is the frontend part of a website for managing graduates of the ENSAM Rabat School usign VueJS 3 
 
 ## Recommended IDE Setup
 
