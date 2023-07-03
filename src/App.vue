@@ -143,8 +143,6 @@
 
 <script>
 import { RouterLink, RouterView } from 'vue-router';
-
-
 import axios from 'axios'
 import Toast from '@/components/Toast.vue'
 import { useUserStore } from '@/stores/user'
@@ -158,6 +156,7 @@ export default {
             userStore
         }
     },
+
     components: {
         RouterLink,
         RouterView,
@@ -174,6 +173,7 @@ export default {
             axios.defaults.headers.common["Authorization"] = "";
         }
     },
+
     methods: {
         isURLContainsRoute(route) {
             return this.$route.path === route;

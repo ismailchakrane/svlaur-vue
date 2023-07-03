@@ -41,17 +41,12 @@
 </template>
 
 <script>
-
 import axios from 'axios'
-
 import { useToastStore } from '@/stores/toast'
 import { useUserStore } from '@/stores/user'
 
-
 export default {
-    
     setup() {
-
         const userStore = useUserStore()
         const toastStore = useToastStore()
 
@@ -284,7 +279,7 @@ export default {
                                 .then(response => {
                                     if (response.data.message === 'success') {
                                         
-                                        this.toastStore.showToast(1000, 'The user ' + this.form.lastName + ' '+ this.form.firstName  + ' is registered', 'bg-emerald-600')
+                                        this.toastStore.showToast(2000, "L'utilisateur " + this.form.lastName + ' ' + this.form.firstName  + ' a été  enregistré', 'text-slate-50 bg-green-600')
 
                                         this.form.lastName = ''
                                         this.form.firstName = ''
@@ -305,7 +300,7 @@ export default {
                                             console.log('in the key', key, 'the msg: ',data[key][0].message)
                                             this.errors.push(data[key][0].message)
                                         }
-                                        this.toastStore.showToast(1000, 'Something went wrong in the line of user' + this.form.lastName + ' '+ this.form.firstName  + 'Please try again', 'bg-red-600')
+                                        this.toastStore.showToast(2000, "Une erreur s'est produite dans la ligne de l'utilisateur " + this.form.lastName + ' ' + this.form.firstName  + " Veuillez réessayer", 'text-slate-50 bg-red-600')
                                     }
                                 })
                                 .catch(error => {

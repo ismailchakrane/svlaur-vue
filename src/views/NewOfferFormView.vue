@@ -66,13 +66,17 @@
 
 import axios from 'axios'
 import { useUserStore } from '@/stores/user'
+import { useToastStore } from '@/stores/toast'
+
 
 export default {
     setup() {
         const userStore = useUserStore()
+        const toastStore = useToastStore()
 
         return {
-            userStore
+            userStore,
+            toastStore
         }
     },
     
@@ -167,15 +171,14 @@ export default {
                     })                    
                     .then(response => {
                         if (response.data.message === 'success') {
-                            console.log("offer registred")
-                            this.toastStore.showToast(1000, 'The offer is succesfully created', 'bg-emerald-600')
+                            this.toastStore.showToast(5000, "L'offer a été bien créee", 'text-slate-50 bg-green-600')
                         } else {
                             const data = JSON.parse(response.data.message)
                             for (const key in data){
                                 console.log('in the key', key, 'the msg: ',data[key][0].message)
                                 this.errors.push(data[key][0].message)
                             }
-                            this.toastStore.showToast(1000, 'Something went wrong', 'bg-red-600')
+                            this.toastStore.showToast(5000, "Une erreur s'est produite. Veuillez réessayer", 'text-slate-50 bg-red-600')
                         }
                     })
                     .catch(error => {
@@ -190,7 +193,7 @@ export default {
             } else if(this.userStore.user.isAuthenticated) {
 				(this.userStore.user.isGraduate === 'true') ? this.$router.push('/jobs') : this.$router.push('/internships');
 			} else {
-                this.$router.push('/');
+                this.$router.push('/newoffer');
             }
         }
     }

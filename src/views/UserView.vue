@@ -130,13 +130,16 @@
 
 import axios from 'axios'
 import { useUserStore } from '@/stores/user'
+import { useToastStore } from '@/stores/toast'
 
 export default {
     setup() {
         const userStore = useUserStore();
+        const toastStore = useToastStore()
 
         return {
             userStore,
+            toastStore
             
         }
     },
@@ -158,7 +161,6 @@ export default {
             // Store the user data
             this.form.user = response.data;
             this.form.user.password = '';
-
         } catch (error) {
             console.log('Error:', error);
             this.$router.push('/notfound');
@@ -264,15 +266,14 @@ export default {
                     .then(response => {
                         if (response.data.message === 'success') {
                             this.$router.push('/users');
-                            console.log('The user ' + this.form.lastName + ' '+ this.form.firstName  + ' is updated')
-                            this.toastStore.showToast(1000, 'The user ' + this.form.lastName + ' '+ this.form.firstName  + ' has been updated', 'bg-emerald-600')
+                            this.toastStore.showToast(5000, "L'utilisateur a été mis à jour", 'text-slate-50 bg-green-600')
                         } else {
                             const data = JSON.parse(response.data.message)
                             for (const key in data){
                                 console.log('in the key', key, 'the msg: ',data[key][0].message)
                                 this.errors.push(data[key][0].message)
                             }
-                            this.toastStore.showToast(1000, 'Something went wrong in the line of user' + this.form.lastName + ' '+ this.form.firstName  + 'Please try again', 'bg-red-600')
+                            this.toastStore.showToast(5000, "Une erreur s'est produite. Veuillez réessayer", 'text-slate-50 bg-red-600')
                             this.$router.push('/notfound');
                         }
                     })

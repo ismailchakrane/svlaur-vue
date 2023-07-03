@@ -52,13 +52,16 @@
 <script>
 import axios from 'axios'
 import { useUserStore } from '@/stores/user'
+import { useToastStore } from '@/stores/toast'
 
 export default {
     setup() {
         const userStore = useUserStore()
+        const toastStore = useToastStore()
 
         return {
-            userStore
+            userStore,
+            toastStore,
         }
     },
     data() {
@@ -102,11 +105,13 @@ export default {
             // Make an API request to delete the offer with the given ID
             axios.delete(`/api/offer/delete/${offerId}/`)
                 .then(() => {
+                    this.toastStore.showToast(5000, "L'offre a été supprimée avec succès", 'text-slate-50 bg-green-600')
                     // Offer deleted successfully, update the list of offers
                     this.getOffers();
                 })
                 .catch(error => {
                     console.error(error);
+                    this.toastStore.showToast(5000, "Une erreur s'est produite. Veuillez réessayer", 'text-slate-50 bg-red-600')
                 });
         },
 
@@ -114,11 +119,13 @@ export default {
             // Make an API request to delete the offer with the given ID
             axios.patch(`/api/offer/verify/${offerId}/`)
                 .then(() => {
+                    this.toastStore.showToast(5000, "L'offre a été vérifiée avec succès", 'text-slate-50 bg-green-600')
                     // Offer deleted successfully, update the list of offers
                     this.getOffers();
                 })
                 .catch(error => {
                     console.error(error);
+                    this.toastStore.showToast(5000, "Une erreur s'est produite. Veuillez réessayer", 'text-slate-50 bg-red-600')
                 });
         },
 
