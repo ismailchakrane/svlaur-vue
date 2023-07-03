@@ -1,4 +1,4 @@
-# svlaur
+# svlaur-vue
 
 This is the frontend part of a website for managing graduates of the ENSAM Rabat School usign VueJS 3 
 
