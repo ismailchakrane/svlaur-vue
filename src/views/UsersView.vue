@@ -115,16 +115,7 @@ export default {
         return Object.values(this.form.users).filter(user =>
         user.last_name.toLowerCase().includes(this.searchBar.toLowerCase())
         || user.first_name.toLowerCase().includes(this.searchBar.toLowerCase())
-        || 
-            (user.job_title === null) ?  1 : user.job_title.toLowerCase().includes(this.searchBar.toLowerCase())       
-        ||
-            (user.year_of_graduate === null) ?  1 : user.year_of_graduate.toLowerCase().includes(this.searchBar.toLowerCase())       
-        ||
-            (user.place_of_work === null) ?  1 : user.place_of_work.toLowerCase().includes(this.searchBar.toLowerCase())       
-
         || user.email.toLowerCase().includes(this.searchBar.toLowerCase())       
-        || user.major.toLowerCase().includes(this.searchBar.toLowerCase())       
-        || user.year_of_major.toLowerCase().includes(this.searchBar.toLowerCase())       
         );
       },
     },

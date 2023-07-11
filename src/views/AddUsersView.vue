@@ -11,7 +11,7 @@
                     lien LinkedIn(Optionnel), Nom d'entreprise(Optionnel), Titre d'emplois(Optionnel),
                     Promotion(optionnel), Lauréats(0/1), admin(0/1)
                 </strong></h4><br>
-                <h4>* Toute information optionnelle non renseigner doit entre remplacer par une valeur 
+                <h4>* Toute information optionnelle non renseigner doit être remplacer par une valeur 
                 <strong class="italic">
                     null 
                 </strong>. Exemple: AHMED,Ali, ahmedali@gmail.com, INDIA, 2, null, null, null, null, 0, 0</h4><br>
@@ -235,6 +235,7 @@ export default {
                             this.form.lastName = lastName.toUpperCase();
                             this.form.firstName = firstName;
                             this.form.email = email;
+                            // this line
                             this.form.password = lastName.toLowerCase() + firstName.toLowerCase()
                             this.form.major = major.toUpperCase();
 

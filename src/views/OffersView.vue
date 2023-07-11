@@ -34,7 +34,7 @@
                                 <button class="py-2 px-3 bg-red-600 text-white text-xs rounded hover:bg-red-900">Supprimer</button>
                             </form>
                             <form class="inline" v-on:submit.prevent="verifyOfferSubmit(offer.id)">
-                                <button class="py-2 px-3 bg-green-600 text-white text-xs rounded hover:bg-green-900">Accepter</button>
+                                <button class="py-2 px-3 bg-green-600 text-white text-xs rounded hover:bg-green-900">Valider</button>
                             </form>
                         </div>
 					</div>

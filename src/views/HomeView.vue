@@ -31,8 +31,14 @@
 						en fonction de vos préférences et compétences, vous aidant ainsi à trouver 
 						les opportunités les plus pertinentes pour votre parcours académique et professionnel.
 						<p class="font-bold">
-							Vous pouvez se connecter et consulter les stages en cliquant sur le							
-							<RouterLink :to="{ 'name': 'login' }" class="underline">lien</RouterLink>
+							Vous pouvez vous connecter et consulter les offres de stages en cliquant sur le					
+							<RouterLink :to="{ 'name': 'login' }" class="underline hover:text-red-700">lien</RouterLink>, à condition que vous disposiez d'un compte. 
+							Par la suite, vous pourrez vous enregistrer en suivant le 
+							<a 
+								href="https://docs.google.com/forms/d/1jCgQ8O06r7RqGWUBjq6-XR05NysNwd_f2cKT9gX_Dvk" 
+								class="underline hover:text-red-700" target="_blank">
+									lien
+							</a>.						
 						</p>
 					</div>
 					<div class="text-center m-6">
@@ -62,8 +68,14 @@
 						et de possibilités de carrière, vous permettant de postuler à des 
 						postes adaptés à votre expertise et vos aspirations professionnelles.
 						<p class="font-bold">
-							Vous pouvez se connecter et consulter les offres d'emplois en cliquant sur le							
-							<RouterLink :to="{ 'name': 'login' }" class="underline">lien</RouterLink>
+							Vous pouvez vous connecter et consulter les offres de stages en cliquant sur le					
+							<RouterLink :to="{ 'name': 'login' }" class="underline hover:text-red-700">lien</RouterLink>, à condition que vous disposiez d'un compte. 
+							Par la suite, vous pourrez vous enregistrer en suivant le 
+							<a 
+								href="https://docs.google.com/forms/d/1jCgQ8O06r7RqGWUBjq6-XR05NysNwd_f2cKT9gX_Dvk" 
+								class="underline hover:text-red-700" target="_blank">
+									lien
+							</a>.						
 						</p>
 					</div>
 

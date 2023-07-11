@@ -13,6 +13,7 @@ import OffersView from '../views/OffersView.vue'
 import StatView from '../views/StatView.vue'
 import UserView from '../views/UserView.vue'
 import UnverifiedOfferView from '../views/UnverifiedOfferView.vue'
+import InfoView from '../views/InfoView.vue'
 
 
 
@@ -83,6 +84,11 @@ const router = createRouter({
       path: '/offers',
       name: 'offers',
       component: OffersView,
+    },
+    {
+      path: '/info',
+      name: 'info',
+      component: InfoView,
     },
     { 
       path: '/:pathMatch(.*)*', 

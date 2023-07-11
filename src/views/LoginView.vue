@@ -9,8 +9,15 @@
                 </p>
 
                 <p class="font-bold">
+                    Si vous ne disposez pas d'un compte, vous avez la possibilité de vous enregistrer en suivant le                    
+                    <a href="https://docs.google.com/forms/d/1jCgQ8O06r7RqGWUBjq6-XR05NysNwd_f2cKT9gX_Dvk" 
+                        class="underline hover:text-red-700" target="_blank">
+                        lien</a>.						
+				</p>
+
+                <p class="font-bold">
                     Vous êtes une entreprise ? vous pouvez consulter le
-                    <RouterLink :to="{ 'name': 'newoffer' }" class="underline">lien</RouterLink>
+                    <RouterLink :to="{ 'name': 'newoffer' }" class="underline hover:text-red-700">lien</RouterLink>
                     afin que vous puissiez publier une offre
                 </p>
             </div>

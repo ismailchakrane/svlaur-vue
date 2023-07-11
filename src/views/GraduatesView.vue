@@ -95,16 +95,7 @@ export default {
         return Object.values(this.form.graduates).filter(grad =>
         grad.last_name.toLowerCase().includes(this.searchBar.toLowerCase())
         || grad.first_name.toLowerCase().includes(this.searchBar.toLowerCase())
-        || 
-            (grad.job_title === null) ?  1 : grad.job_title.toLowerCase().includes(this.searchBar.toLowerCase())       
-        ||
-            (grad.year_of_graduate === null) ?  1 : grad.year_of_graduate.toLowerCase().includes(this.searchBar.toLowerCase())       
-        ||
-            (grad.place_of_work === null) ?  1 : grad.place_of_work.toLowerCase().includes(this.searchBar.toLowerCase())       
-
         || grad.email.toLowerCase().includes(this.searchBar.toLowerCase())       
-        || grad.major.toLowerCase().includes(this.searchBar.toLowerCase())       
-        || grad.year_of_major.toLowerCase().includes(this.searchBar.toLowerCase())    
         );
       },
     },

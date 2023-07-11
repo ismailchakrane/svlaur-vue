@@ -6,7 +6,7 @@
                 <div class="flex flex-row justify-items-stretch  items-center justify-between">
                     <h2 class="text-center mb-9 text-lg basis-4/12 mx-auto" ><strong>Nombre de lauréats par filière </strong></h2>
 
-                    <h2 class="text-center mb-9 text-lg basis-4/12 mx-auto"><strong>Pourcentages des lauréats travailleurs </strong></h2>
+                    <h2 class="text-center mb-9 text-lg basis-4/12 mx-auto"><strong>Pourcentages des lauréats embauchés</strong></h2>
                 </div>
 
                 <div class="flex flex-row justify-items-stretch  items-center justify-between">
